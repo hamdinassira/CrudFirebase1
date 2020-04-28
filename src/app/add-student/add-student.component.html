@@ -1,0 +1,61 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Add Student</h1>
+</div>
+<form #addForm="ngForm" (ngSubmit)="save()">
+    <div class="row">
+        <div class="col-lg-5 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" class="form-control" [(ngModel)]="student.firstName"
+                        #firstNameV="ngModel" required>
+                    <div *ngIf="(firstNameV.invalid && firstNameV.touched) ||(firstNameV.invalid && addForm.submitted)"
+                        class="alert alert-danger">
+                        <div *ngIf="firstNameV.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" class="form-control" [(ngModel)]="student.lastName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="student.email" required
+                        #emailV="ngModel" email>
+                    <div *ngIf="(emailV.invalid && emailV.touched) ||(emailV.invalid && addForm.submitted)"
+                        class="alert alert-danger">
+                        <div *ngIf="emailV.errors.required">Email is required</div>
+                        <div *ngIf="emailV.errors.email">Email is invalid</div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="student.password" required
+                        #passValid="ngModel" minlength="6">
+                    <div *ngIf="(passValid.invalid && passValid.touched) ||(passValid.invalid && addForm.submitted)"
+                        class="alert alert-danger">
+                        <div *ngIf="passValid.errors.required">Password is required</div>
+                       
+                        <div *ngIf="passValid.errors.minlength">at least minimum 6 character</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 mb-3">
+                    <label>Age</label>
+                    <input type="text" class="form-control" name="age" [(ngModel)]="student.age">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label>Phone number</label>
+                    <input type="text" class="form-control" name="phone" [(ngModel)]="student.phone">
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="btn btn-secondary" id="btn3">Cancel</button>
+                <button type="submit" class="btn btn-success" *ngIf="student.id" id="btn1">UpdateStudent</button>
+                <button type="submit" class="btn btn-success" *ngIf="!student.id" id="btn2">AddStudent</button>
+            </div>
+        </div>
+    </div>
+</form>
